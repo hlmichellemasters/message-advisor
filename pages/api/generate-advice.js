@@ -55,11 +55,6 @@ export default async function (req, res) {
 }
 
 function generatePrompt(message) {
-  //   const capitalizedAnimal =
-  //     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-
-  return `Provide insight and advice and an example response for an ENFP responding to the following text message from an INFJ person:
+  return `Provide insight and advice and an example response for an ENTP responding to the following text message from an INFJ person:
   ${message} `;
 }
-//For ENFP: I'm sorry that I hurt your feelings. I understand how you feel, and I want to make sure that I don't do it again. Can you tell me what I did that hurt you so I can make sure I don't do it again in the future?
-//For INFJ: I'm sorry that I hurt your feelings. I understand how you feel and I respect your decision to not want to text anymore. I hope that in time you'll forgive me and we can talk things through.
