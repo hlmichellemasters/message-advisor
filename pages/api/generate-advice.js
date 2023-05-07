@@ -17,8 +17,10 @@ export default async function (req, res) {
   }
 
   const message = req.body.message || '';
-  console.log('helllllloooooo');
   console.log(message);
+  const prompt = generatePrompt(message);
+  console.log(prompt);
+
   if (message.trim().length === 0) {
     res.status(400).json({
       error: {
@@ -31,7 +33,7 @@ export default async function (req, res) {
   try {
     const completion = await openai.createCompletion({
       model: 'text-davinci-003',
-      prompt: generatePrompt(message),
+      prompt: prompt,
       temperature: 0.6,
       max_tokens: 2048,
     });
@@ -56,6 +58,8 @@ function generatePrompt(message) {
   //   const capitalizedAnimal =
   //     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
 
-  return `Provide insight and advice and an example response for responding to the following text message from a person:
+  return `Provide insight and advice and an example response for an ENFP responding to the following text message from an INFJ person:
   ${message} `;
 }
+//For ENFP: I'm sorry that I hurt your feelings. I understand how you feel, and I want to make sure that I don't do it again. Can you tell me what I did that hurt you so I can make sure I don't do it again in the future?
+//For INFJ: I'm sorry that I hurt your feelings. I understand how you feel and I respect your decision to not want to text anymore. I hope that in time you'll forgive me and we can talk things through.
