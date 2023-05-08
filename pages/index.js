@@ -37,7 +37,11 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: messageInput }),
+        body: JSON.stringify({
+          userMBTI: userMBTI,
+          receiverMBTI: receiverMBTI,
+          message: messageInput,
+        }),
       });
 
       const data = await response.json();
@@ -68,7 +72,7 @@ export default function Home() {
         <img src="/message.png" className={styles.icon} />
         <h3>Get Advice on Messages</h3>
         <form onSubmit={onSubmit}>
-          <label>Your MBTI</label>
+          <label>Your MBTI (optional)</label>
           <Select
             className={styles.select}
             placeholder="Select your MBTI type"
@@ -76,7 +80,7 @@ export default function Home() {
             onChange={(option) => setUserMBTI(option.value)}
             value={userMBTI ? { label: userMBTI } : 'Select your MBTI type'}
           />
-          <label>Message Sender's MBTI</label>
+          <label>Message Sender's MBTI (optional)</label>
           <Select
             className={styles.select}
             placeholder="Select their MBTI type"

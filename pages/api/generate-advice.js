@@ -15,12 +15,11 @@ export default async function (req, res) {
     });
     return;
   }
-  console.log(req.body);
+  console.log('body: ', req.body);
 
   const { userMBTI, receiverMBTI, message } = req.body;
-  console.log(message);
   const prompt = generatePrompt(userMBTI, receiverMBTI, message);
-  console.log(prompt);
+  console.log('prompt: ', prompt);
 
   if (message.trim().length === 0) {
     res.status(400).json({
