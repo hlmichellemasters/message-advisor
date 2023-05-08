@@ -10,6 +10,8 @@ export default function Home() {
   const [receiverMBTI, setReceiverMBTI] = useState('');
   const [result, setResult] = useState();
 
+  const [loading, setLoading] = useState(false);
+
   const mbtiOptions = [
     { value: 'ISTJ', label: 'ISTJ' },
     { value: 'ISFJ', label: 'ISFJ' },
@@ -31,6 +33,12 @@ export default function Home() {
 
   async function onSubmit(event) {
     event.preventDefault();
+
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+
     try {
       const response = await fetch('/api/generate-advice', {
         method: 'POST',
@@ -44,7 +52,6 @@ export default function Home() {
         }),
       });
 
-      const data = await response.json();
       if (response.status !== 200) {
         throw (
           data.error ||
@@ -52,12 +59,17 @@ export default function Home() {
         );
       }
 
+      const data = await response.json();
       setResult(data.result);
       setMessageInput('');
+      setUserMBTI('');
+      setReceiverMBTI('');
     } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -98,9 +110,13 @@ export default function Home() {
             value={messageInput}
             onChange={(e) => setMessageInput(e.target.value)}
           />
-
           <input type="submit" value="Get Advice" />
         </form>
+        {loading && (
+          <div>
+            <h4>Analyzing how to respond...💡</h4>
+          </div>
+        )}
         <div className={styles.result}>{result}</div>
       </main>
     </div>
