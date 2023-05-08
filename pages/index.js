@@ -10,7 +10,7 @@ export default function Home() {
   const [receiverMBTI, setReceiverMBTI] = useState('');
   const [result, setResult] = useState();
 
-  const options = [
+  const mbtiOptions = [
     { value: 'ISTJ', label: 'ISTJ' },
     { value: 'ISFJ', label: 'ISFJ' },
     { value: 'INFJ', label: 'INFJ' },
@@ -68,20 +68,25 @@ export default function Home() {
         <img src="/message.png" className={styles.icon} />
         <h3>Get Advice on Messages</h3>
         <form onSubmit={onSubmit}>
+          <label>Your MBTI</label>
           <Select
             className={styles.select}
             placeholder="Select your MBTI type"
-            options={options}
+            options={mbtiOptions}
             onChange={(option) => setUserMBTI(option.value)}
-            value={userMBTI}
+            value={userMBTI ? { label: userMBTI } : 'Select your MBTI type'}
           />
+          <label>Message Sender's MBTI</label>
           <Select
             className={styles.select}
             placeholder="Select their MBTI type"
-            options={options}
+            options={mbtiOptions}
             onChange={(option) => setReceiverMBTI(option.value)}
-            value={receiverMBTI}
+            value={
+              receiverMBTI ? { label: receiverMBTI } : 'Select your MBTI type'
+            }
           />
+          <label>Message to Analyze and Provide a Response to:</label>
           <input
             type="text"
             name="message"

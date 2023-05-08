@@ -15,10 +15,11 @@ export default async function (req, res) {
     });
     return;
   }
+  console.log(req.body);
 
-  const message = req.body.message || '';
+  const { userMBTI, receiverMBTI, message } = req.body;
   console.log(message);
-  const prompt = generatePrompt(message);
+  const prompt = generatePrompt(userMBTI, receiverMBTI, message);
   console.log(prompt);
 
   if (message.trim().length === 0) {
@@ -54,7 +55,7 @@ export default async function (req, res) {
   }
 }
 
-function generatePrompt(message) {
-  return `Provide insight and advice and an example response for an ENTP responding to the following text message from an INFJ person:
+function generatePrompt(userMBTI, receiverMBTI, message) {
+  return `Provide insight and advice and an example response for ${userMBTI} responding to the following text message from ${receiverMBTI} person:
   ${message} `;
 }
