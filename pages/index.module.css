@@ -33,13 +33,14 @@
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
-  color: #202123;
+  color: #10a37f;
   margin: 16px 0 40px;
 }
 .main form {
   display: flex;
   flex-direction: column;
   width: 350px;
+  margin-bottom: 100px;
 }
 .main .select {
   padding: 12px 16px;
